@@ -1,0 +1,2 @@
+- Adicionar .env.example []
+- Fazer deploy na AWS []

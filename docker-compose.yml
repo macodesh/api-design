@@ -1,0 +1,47 @@
+version: "3.5"
+
+services:
+  # Configuração do serviço 'db', que é um banco de dados PostgreSQL.
+  db:
+    image: postgres:alpine
+    container_name: api_design_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ApiDesign
+    ports:
+      - 5432:5432
+    restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "ApiDesign", "-U", "postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    # Health check para o serviço 'db':
+    # O health check utiliza o comando 'pg_isready' para verificar a disponibilidade do banco de dados PostgreSQL.
+    # O health check será executado a cada 30 segundos ('interval: 30s') com um tempo limite de 10 segundos ('timeout: 10s')
+    # e até três tentativas ('retries: 3') antes de considerar o serviço não saudável. O início do health check é
+    # adiado em 30 segundos ('start_period: 30s') para dar tempo ao banco de dados para iniciar após o container.
+
+  # Configuração do serviço 'adminer', que é um cliente para gerenciar bancos de dados.
+  adminer:
+    image: adminer
+    container_name: api_design_adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    healthcheck:
+      test: "echo 'php -r \"phpinfo();\"'"
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    # Health check para o serviço 'adminer':
+    # O health check utiliza o comando 'echo' para verificar se o serviço está respondendo.
+    # O health check será executado a cada 30 segundos ('interval: 30s') com um tempo limite de 10 segundos ('timeout: 10s')
+    # e até três tentativas ('retries: 3') antes de considerar o serviço não saudável. O início do health check é
+    # adiado em 10 segundos ('start_period: 10s') para dar tempo ao serviço para iniciar após o container.
