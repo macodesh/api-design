@@ -1,5 +1,4 @@
 import { type NextFunction, type Request, type Response } from 'express'
-
 import { prisma } from '../modules/db'
 
 // Obtém todas as atualizações associadas aos produtos pertencentes ao usuário logado.

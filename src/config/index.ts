@@ -1,5 +1,4 @@
 import merge from 'lodash.merge'
-
 import prodConfig from './prod'
 import localConfig from './local'
 

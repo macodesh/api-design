@@ -18,6 +18,29 @@ function validationResponse(
   } else next()
 }
 
+// Validação para sign up/sign in.
+export const validateUserInput = [
+  body('username')
+    .not()
+    .isEmpty()
+    .withMessage('Username is required')
+    .isString()
+    .withMessage('Username must be a string')
+    .isLength({ min: 3, max: 50 })
+    .withMessage('Username must be between 3 and 50 characters'),
+
+  body('password')
+    .not()
+    .isEmpty()
+    .withMessage('Password is required')
+    .isString()
+    .withMessage('Password must be a string')
+    .isLength({ min: 8, max: 50 })
+    .withMessage('Password must be between 8 and 50 characters'),
+
+  validationResponse
+]
+
 // Validações para a rota '/product'.
 export const validateProductInput = [
   body('name')
@@ -65,6 +88,43 @@ export const validateUpdateInput = [
   validationResponse
 ]
 
+// Validações para criação de atualização.
+export const validateCreateUpdateInput = [
+  body('title')
+    .not()
+    .isEmpty()
+    .withMessage('Title is required')
+    .isString()
+    .withMessage('Title must be a string')
+    .isLength({ min: 3, max: 50 })
+    .withMessage('Title must be between 3 and 50 characters'),
+
+  body('body')
+    .not()
+    .isEmpty()
+    .withMessage('Body is required')
+    .isString()
+    .withMessage('Body must be a string')
+    .isLength({ min: 3, max: 200 })
+    .withMessage('Body must be between 3 and 200 characters'),
+
+  body('version')
+    .optional()
+    .isString()
+    .withMessage('Version must be a string')
+    .isLength({ max: 10 })
+    .withMessage('Version must be under 10 characters'),
+
+  body('productId')
+    .not()
+    .isEmpty()
+    .withMessage('productId is required')
+    .isString()
+    .withMessage('productId must be a string'),
+
+  validationResponse
+]
+
 // Validações para a rota '/updatestep'.
 export const validateUpdateStepInput = [
   body('name')
@@ -85,7 +145,6 @@ export const validateUpdateStepInput = [
   validationResponse
 ]
 
-// Validações para a rota '/updatestep'.
 export const validateCreateUpdateStepInput = [
   body('name')
     .optional()

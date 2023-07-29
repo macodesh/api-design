@@ -1,5 +1,4 @@
-import { type Request, Router, type Response, type NextFunction } from 'express'
-
+import { type NextFunction, type Request, type Response, Router } from 'express'
 import {
   validateCreateUpdateInput,
   validateCreateUpdateStepInput,

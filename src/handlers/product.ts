@@ -1,5 +1,4 @@
 import { type NextFunction, type Request, type Response } from 'express'
-
 import { prisma } from '../modules/db'
 
 // Obtém todos os produtos pertencentes a um usuário específico.
