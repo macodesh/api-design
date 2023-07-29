@@ -2,7 +2,7 @@ import { hash } from 'bcrypt'
 import { verify } from 'jsonwebtoken'
 import { type NextFunction, type Request, type Response } from 'express'
 import { comparePasswords, createToken, hashPassword, verifyToken } from '../auth'
-import { type IUser } from '../../interfaces'
+import { type IUser } from '../../../interfaces'
 
 describe.skip('comparePasswords', () => {
   it('should return true if password matches hash', async () => {

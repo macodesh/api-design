@@ -1,4 +1,5 @@
 import express, {
+  type Express,
   json,
   type NextFunction,
   type Request,
@@ -7,14 +8,14 @@ import express, {
 } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import { router } from './router'
-import { verifyToken } from './modules/auth'
-import { createNewUser, signIn } from './handlers/user'
-import { errorHandler } from './modules/errorHandler'
-import { validateUserInput } from './modules/validations'
+import { router } from './api/router'
+import { verifyToken } from './api/modules/auth'
+import { createNewUser, signIn } from './api/handlers/user'
+import { errorHandler } from './api/modules/errorHandler'
+import { validateUserInput } from './api/modules/validations'
 
 // Cria uma instância do aplicativo Express.
-const app: express.Express = express()
+const app: Express = express()
 
 // Adiciona o middleware 'cors' para permitir requisições de diferentes origens (Cross-Origin Resource Sharing).
 app.use(cors())
@@ -29,16 +30,13 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 
 // Rota principal que responde com uma mensagem JSON "Hello, World!" quando acessada via método GET.
-app.get('/', (_req, res) => {
+app.get('/api', (_req, res) => {
   res.status(200).json({ message: 'Hello, World!' })
 })
 
-// Rota '/api' que é protegida pelo middleware 'verifyToken' e roteia as requisições para o roteador 'router'.
-app.use('/api', verifyToken, router)
-
 // Rota para criar um novo usuário via método POST, usando o middleware 'createNewUser'.
 app.post(
-  '/user',
+  '/api/signup',
   validateUserInput,
   (req: Request, res: Response, next: NextFunction) => {
     void createNewUser(req, res, next)
@@ -47,12 +45,15 @@ app.post(
 
 // Rota para fazer login (signIn) via método POST, usando o middleware 'signIn'.
 app.post(
-  '/signin',
+  '/api/signin',
   validateUserInput,
   (req: Request, res: Response, next: NextFunction) => {
     void signIn(req, res, next)
   }
 )
+
+// Rota '/api' que é protegida pelo middleware 'verifyToken' e roteia as requisições para o roteador 'router'.
+app.use('/api', verifyToken, router)
 
 // Middleware 'errorHandler' para tratar erros.
 app.use(errorHandler)

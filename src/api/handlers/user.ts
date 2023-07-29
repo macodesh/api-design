@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import { prisma } from '../modules/db'
-import { type UserInput } from '../interfaces'
+import { type UserInput } from '../../interfaces'
 import { comparePasswords, createToken, hashPassword } from '../modules/auth'
 
 // Cria um novo usuário com o nome de usuário e senha fornecidos no corpo da solicitação.
