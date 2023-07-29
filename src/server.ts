@@ -1,6 +1,5 @@
 // Importa o módulo 'dotenv' para carregar variáveis de ambiente a partir do arquivo .env.
 import * as dotenv from 'dotenv'
-
 import { app } from './app'
 import config from './config'
 
