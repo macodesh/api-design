@@ -1,8 +1,8 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import { sign, verify } from 'jsonwebtoken'
 import { compare, hash } from 'bcrypt'
-import { type IUser } from '../../interfaces'
-import config from '../../config'
+import { type IUser } from '../interfaces'
+import config from '../config'
 
 // Importa a chave secreta JWT e o número de 'salts' do arquivo de configuração.
 const jwtSecret = config.secrets.jwt

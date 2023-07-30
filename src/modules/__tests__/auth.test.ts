@@ -7,7 +7,7 @@ import {
   hashPassword,
   verifyToken
 } from '../auth'
-import { type IUser } from '../../../interfaces'
+import { type IUser } from '../../interfaces'
 
 describe.skip('comparePasswords', () => {
   it('should return true if password matches hash', async () => {

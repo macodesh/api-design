@@ -8,11 +8,11 @@ import express, {
 } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import { router } from './api/router'
-import { verifyToken } from './api/modules/auth'
-import { createNewUser, signIn } from './api/handlers/user'
-import { errorHandler } from './api/modules/errorHandler'
-import { validateUserInput } from './api/modules/validations'
+import { router } from './router'
+import { verifyToken } from './modules/auth'
+import { createNewUser, signIn } from './handlers/user'
+import { errorHandler } from './modules/errorHandler'
+import { validateUserInput } from './modules/validations'
 
 // Cria uma instância do aplicativo Express.
 const app: Express = express()
