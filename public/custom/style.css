@@ -1,0 +1,8 @@
+.view__container {
+  position: relative;
+}
+
+.view__buttons {
+  position: absolute;
+  top: 1rem;
+}
