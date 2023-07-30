@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/triple-slash-reference
+/// <reference path="../../types.d.ts" />
 import { type NextFunction, type Request, type Response } from 'express'
 import { prisma } from '../modules/db'
 
