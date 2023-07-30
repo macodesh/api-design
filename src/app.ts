@@ -1,3 +1,4 @@
+import path from 'path'
 import express, {
   type Express,
   json,
@@ -8,14 +9,33 @@ import express, {
 } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
+import { createServer } from 'livereload'
+import connectLivereload from 'connect-livereload'
 import { router } from './api/router'
 import { verifyToken } from './api/modules/auth'
 import { createNewUser, signIn } from './api/handlers/user'
 import { errorHandler } from './api/modules/errorHandler'
 import { validateUserInput } from './api/modules/validations'
 
+const liveReloadServer = createServer()
+liveReloadServer.server.once('connection', () => {
+  setTimeout(() => {
+    liveReloadServer.refresh('/')
+  }, 10)
+})
+
 // Cria uma instância do aplicativo Express.
 const app: Express = express()
+
+// Configurar a view engine para usar o Pug.
+app.set('view engine', 'pug')
+app.set('views', path.join(__dirname, 'views'))
+
+// Middleware para servir arquivos estáticos na pasta 'public'.
+// eslint-disable-next-line import/no-named-as-default-member
+app.use(express.static(path.join(__dirname, '../public')))
+
+app.use(connectLivereload())
 
 // Adiciona o middleware 'cors' para permitir requisições de diferentes origens (Cross-Origin Resource Sharing).
 app.use(cors())
@@ -28,6 +48,11 @@ app.use(json())
 
 // Adiciona o middleware 'express.urlencoded()' para permitir o parse de corpos de requisições codificados com x-www-form-urlencoded.
 app.use(urlencoded({ extended: true }))
+
+// Rota para a página inicial.
+app.get('/', (_req, res) => {
+  res.render('index', { title: 'Home' })
+})
 
 // Rota principal que responde com uma mensagem JSON "Hello, World!" quando acessada via método GET.
 app.get('/api', (_req, res) => {
