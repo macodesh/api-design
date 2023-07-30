@@ -8,5 +8,5 @@ dotenv.config()
 
 // Inicia o servidor Express para ouvir em uma porta específica definida em 'config.port'.
 app.listen(config.port, () => {
-  console.log(`Listening on port ${config.port}!`)
+  console.log(`Server running on port ${config.port}!`)
 })
