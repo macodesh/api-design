@@ -1,45 +1,10 @@
-doctype html
-html
-  head
-    meta(charset="utf-8")
-    meta(name="viewport" content="width=device-width, initial-scale=1")
-    title= title
-    link(rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css")
-    link(rel="stylesheet" type="text/css" href="/custom/style.css")
-    script(src="/bootstrap/js/bootstrap.min.js")
-  body(data-bs-theme="dark").bg-black
-    header
-      navbar.navbar.navbar-expand-lg
-        div.container-fluid
-          a.navbar-brand(href="#") LOGO
-          button.navbar-toggler(type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false")
-            span.navbar-toggler-icon
-        div.collapse.navbar-collapse#navbarNav
-          ul.navbar-nav.me-auto.mb-2.mb-lg-0.ps-3
-            li.nav-item
-              a.nav-link(href="#") GitHub
-            li.nav-item
-              a.nav-link(href="#") LinkedIn
-    main
-      h1.text-white.text-center.pb-2 Changelog
-      section.container.pt-5.h-50.d-flex.align-items-center.flex-column.view__container
-        div.d-flex.justify-content-center.btn-group(role="group").z-0.view__buttons
-          button.btn.bg-dark Recentes
-          button.btn.btn-outline-secondary Todas
-        div.d-flex.rounded-4.p-1.bg-dark.mb-5.z-1
-          span.w-25.p-4.text-warning IN-PROGRESS
-          div.w-75.p-4
-            h2 Projeto App Design
-            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lobortis, enim vel gravida dignissim, ipsum nulla mattis massa, porta auctor nisi augue vitae orci. Sed ornare lectus eget urna pretium vulputate. Praesent sed iaculis lectus. Nullam eget ex dolor.
-            div.d-flex.justify-content-center.py-4
-              img(src="https://placehold.co/450x250" alt="").rounded-4
-            div.pt-3
-              h3 Atualizações
-              div.pt-2
-                li.list-group-item Task 1
-                  ul.list-group.list-group-flush
-                    li.list-group-item Step 1A
-                    li.list-group-item Step 2A
-                li.list-group-item Task 2
-                  ul.list-group.list-group-flush
-                    li.list-group-item Step 2A
+extends layout.pug
+
+block content
+  main
+    h1.text-white.text-center.pb-3 Changelog
+    section.container.pt-5.h-50.d-flex.align-items-center.flex-column.view__container
+      div.d-flex.justify-content-center.btn-group(role="group").z-0.view__buttons
+        button.btn.bg-dark Recentes
+        button.btn.btn-outline-secondary Todas
+      include includes/product.pug

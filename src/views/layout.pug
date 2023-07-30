@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title= title
+    link(rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css")
+    link(rel="stylesheet" type="text/css" href="/custom/style.css")
+    script(src="/bootstrap/js/bootstrap.min.js")
+  body(data-bs-theme="dark").bg-black
+    include includes/header.pug
+    block content
