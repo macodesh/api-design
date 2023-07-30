@@ -17,6 +17,7 @@ import { createNewUser, signIn } from './api/handlers/user'
 import { errorHandler } from './api/modules/errorHandler'
 import { validateUserInput } from './api/modules/validations'
 
+// Envia um comando ao servidor para recarregar o browser quando alguma alteração for feita nos arquivos estáticos.
 const liveReloadServer = createServer()
 liveReloadServer.server.once('connection', () => {
   setTimeout(() => {
@@ -35,6 +36,7 @@ app.set('views', path.join(__dirname, 'views'))
 // eslint-disable-next-line import/no-named-as-default-member
 app.use(express.static(path.join(__dirname, '../public')))
 
+// Habilita o live reload.
 app.use(connectLivereload())
 
 // Adiciona o middleware 'cors' para permitir requisições de diferentes origens (Cross-Origin Resource Sharing).
