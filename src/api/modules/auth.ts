@@ -22,7 +22,10 @@ export async function hashPassword(password: string): Promise<string> {
 }
 
 // Função que cria um token JWT com base nas informações do usuário ({ id, username }).
-export function createToken({ id, username }: IUser, secret = jwtSecret): string {
+export function createToken(
+  { id, username }: IUser,
+  secret = jwtSecret
+): string {
   return sign({ id, username }, secret, { expiresIn: '2h' })
 }
 

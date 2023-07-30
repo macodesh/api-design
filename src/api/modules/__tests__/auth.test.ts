@@ -1,7 +1,12 @@
 import { hash } from 'bcrypt'
 import { verify } from 'jsonwebtoken'
 import { type NextFunction, type Request, type Response } from 'express'
-import { comparePasswords, createToken, hashPassword, verifyToken } from '../auth'
+import {
+  comparePasswords,
+  createToken,
+  hashPassword,
+  verifyToken
+} from '../auth'
 import { type IUser } from '../../../interfaces'
 
 describe.skip('comparePasswords', () => {
