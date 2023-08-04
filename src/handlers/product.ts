@@ -3,7 +3,6 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import { prisma } from '../modules/db'
 
-// Obtém todos os produtos pertencentes a um usuário específico.
 export async function getAllProducts(
   req: Request,
   res: Response,
@@ -19,7 +18,6 @@ export async function getAllProducts(
       }
     })
 
-    // Retorna os produtos do usuário em formato JSON.
     res.status(200).json({
       data: user?.products.map(({ id, name, createdAt }) => {
         return {
@@ -30,12 +28,10 @@ export async function getAllProducts(
       })
     })
   } catch (e) {
-    // Encaminha o erro para o middleware de tratamento de erros.
     next(e)
   }
 }
 
-// Obtém um produto específico pelo seu ID, desde que pertença ao usuário logado.
 export async function getProductById(
   req: Request,
   res: Response,
@@ -49,7 +45,6 @@ export async function getProductById(
       }
     })
 
-    // Verifica se o produto foi encontrado e retorna-o em formato JSON.
     if (productFound == null) {
       res.status(404).json({ message: 'Product not found' })
     } else {
@@ -62,12 +57,10 @@ export async function getProductById(
       })
     }
   } catch (e) {
-    // Encaminha o erro para o middleware de tratamento de erros.
     next(e)
   }
 }
 
-// Cria um novo produto associado ao usuário logado.
 export async function createProduct(
   req: Request,
   res: Response,
@@ -81,7 +74,6 @@ export async function createProduct(
       }
     })
 
-    // Retorna o novo produto criado em formato JSON.
     res.status(201).json({
       data: {
         id: newProduct.id,
@@ -90,12 +82,10 @@ export async function createProduct(
       }
     })
   } catch (e) {
-    // Encaminha o erro para o middleware de tratamento de erros.
     next(e)
   }
 }
 
-// Atualiza um produto específico pelo seu ID, desde que pertença ao usuário logado.
 export async function updateProduct(
   req: Request,
   res: Response,
@@ -112,7 +102,6 @@ export async function updateProduct(
       }
     })
 
-    // Verifica se o produto foi atualizado com sucesso e retorna-o em formato JSON.
     if (updatedProduct == null) {
       res.status(404).json({ message: 'Product not found' })
     } else {
@@ -125,12 +114,10 @@ export async function updateProduct(
       })
     }
   } catch (e) {
-    // Encaminha o erro para o middleware de tratamento de erros.
     next(e)
   }
 }
 
-// Deleta um produto específico pelo seu ID, desde que pertença ao usuário logado.
 export async function deleteProduct(
   req: Request,
   res: Response,
@@ -144,15 +131,12 @@ export async function deleteProduct(
       }
     })
 
-    // Verifica se o produto foi encontrado e deletado com sucesso.
     if (productFound == null) {
       res.status(404).json({ message: 'Product not found' })
     } else {
-      // Retorna uma resposta com status 204 (No Content) para indicar que o produto foi deletado com sucesso.
       res.status(204).end()
     }
   } catch (e) {
-    // Encaminha o erro para o middleware de tratamento de erros.
     next(e)
   }
 }

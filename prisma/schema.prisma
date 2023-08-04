@@ -10,96 +10,51 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Define o modelo User, que representa a tabela de usuários no banco de dados.
 model User {
-  // Define o campo id como uma chave primária com valor padrão uuid().
-  id        String   @id @default(uuid())
-  // Define o campo createdAt como uma data e hora com valor padrão now().
-  createdAt DateTime @default(now())
-
-  // Define o campo username como único, ou seja, não pode haver dois usuários com o mesmo nome de usuário.
-  username String @unique
-  // Define o campo password para armazenar a senha do usuário.
-  password String
-
-  // Define a relação entre o usuário e os produtos. Um usuário pode ter vários produtos.
-  products Product[]
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  username  String    @unique
+  password  String
+  products  Product[]
 }
 
-// Define o modelo Product, que representa a tabela de produtos no banco de dados.
 model Product {
-  // Define o campo id como uma chave primária com valor padrão uuid().
   id        String   @id @default(uuid())
-  // Define o campo createdAt como uma data e hora com valor padrão now().
   createdAt DateTime @default(now())
-
-  // Define o campo name para armazenar o nome do produto. Utiliza o tipo de banco de dados VarChar com limite de 255 caracteres.
-  name String @db.VarChar(255)
-
-  // Define a relação entre o produto e o usuário. Um produto pertence a um único usuário.
-  belongsTo User   @relation(fields: [userId], references: [id])
-  // Define o campo userId como uma chave estrangeira que referencia o campo id da tabela de usuários.
+  name      String   @db.VarChar(255)
+  belongsTo User     @relation(fields: [userId], references: [id])
   userId    String
+  updates   Update[]
 
-  // Define a relação entre o produto e as atualizações. Um produto pode ter várias atualizações.
-  updates Update[]
-
-  // Define uma restrição única para garantir que o id e o userId sejam exclusivos em conjunto.
   @@unique([id, userId])
 }
 
-// Define um enum chamado UPDATE_STATUSES que representa os possíveis status de uma atualização.
 enum UPDATE_STATUSES {
   IN_PROGRESS
   SHIPPED
   DEPRECATED
 }
 
-// Define o modelo Update, que representa a tabela de atualizações no banco de dados.
 model Update {
-  // Define o campo id como uma chave primária com valor padrão uuid().
-  id        String   @id @default(uuid())
-  // Define o campo createdAt como uma data e hora com valor padrão now().
-  createdAt DateTime @default(now())
-  // Define o campo updatedAt como uma data e hora que é atualizada automaticamente sempre que o registro é atualizado.
-  updatedAt DateTime @updatedAt
-
-  // Define o campo title para armazenar o título da atualização.
-  title   String
-  // Define o campo body para armazenar o corpo/descrição da atualização.
-  body    String
-  // Define o campo status como um enum que representa o status da atualização. O valor padrão é IN_PROGRESS.
-  status  UPDATE_STATUSES @default(IN_PROGRESS)
-  // Define o campo version para armazenar a versão da atualização.
-  version String?
-  // Define o campo asset para armazenar o asset (ativo) da atualização.
-  asset   String?
-
-  // Define a relação entre a atualização e o produto. Uma atualização pertence a um único produto.
-  belongsTo Product @relation(fields: [productId], references: [id])
-  // Define o campo productId como uma chave estrangeira que referencia o campo id da tabela de produtos.
-  productId String
-
-  // Define a relação entre a atualização e os passos da atualização. Uma atualização pode ter vários passos de atualização.
+  id          String          @id @default(uuid())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  title       String
+  body        String
+  status      UPDATE_STATUSES @default(IN_PROGRESS)
+  version     String?
+  asset       String?
+  belongsTo   Product         @relation(fields: [productId], references: [id])
+  productId   String
   updateSteps UpdateStep[]
 }
 
-// Define o modelo UpdateStep, que representa a tabela de passos de atualização no banco de dados.
 model UpdateStep {
-  // Define o campo id como uma chave primária com valor padrão uuid().
-  id        String   @id @default(uuid())
-  // Define o campo createdAt como uma data e hora com valor padrão now().
-  createdAt DateTime @default(now())
-  // Define o campo updatedAt como uma data e hora que é atualizada automaticamente sempre que o registro é atualizado.
-  updatedAt DateTime
-
-  // Define o campo name para armazenar o nome do passo de atualização. Utiliza o tipo de banco de dados VarChar com limite de 255 caracteres.
-  name        String @db.VarChar(255)
-  // Define o campo description para armazenar a descrição do passo de atualização.
+  id          String   @id @default(uuid())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  name        String   @db.VarChar(255)
   description String
-
-  // Define a relação entre o passo de atualização e a atualização. Um passo de atualização pertence a uma única atualização.
-  belongsTo Update @relation(fields: [updateId], references: [id])
-  // Define o campo updateId como uma chave estrangeira que referencia o campo id da tabela de atualizações.
-  updateId  String
+  belongsTo   Update   @relation(fields: [updateId], references: [id])
+  updateId    String
 }

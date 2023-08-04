@@ -22,19 +22,16 @@ import {
 } from './handlers/update'
 import { errorHandler } from './modules/errorHandler'
 
-// Importa o módulo Router do Express para criar o roteador.
 const router: Router = Router()
 
 /**
  * Products
  */
 
-// Rota para obter todos os produtos.
 router.get('/product', (req, res, next) => {
   void getAllProducts(req, res, next)
 })
 
-// Rota para criar um novo produto, com validação dos dados de entrada.
 router.post(
   '/product',
   validateProductInput,
@@ -43,12 +40,10 @@ router.post(
   }
 )
 
-// Rota para obter um produto pelo seu ID.
 router.get('/product/:id', (req, res, next) => {
   void getProductById(req, res, next)
 })
 
-// Rota para atualizar um produto pelo seu ID, com validação dos dados de entrada.
 router.put(
   '/product/:id',
   validateProductInput,
@@ -57,7 +52,6 @@ router.put(
   }
 )
 
-// Rota para deletar um produto pelo seu ID.
 router.delete('/product/:id', (req, res, next) => {
   void deleteProduct(req, res, next)
 })
@@ -66,12 +60,10 @@ router.delete('/product/:id', (req, res, next) => {
  * Updates
  */
 
-// Rota para obter todas as atualizações (updates).
 router.get('/update', (req, res, next) => {
   void getAllUpdates(req, res, next)
 })
 
-// Rota para criar uma nova atualização (update), com validação dos dados de entrada.
 router.post(
   '/update',
   validateCreateUpdateInput,
@@ -80,12 +72,10 @@ router.post(
   }
 )
 
-// Rota para obter uma atualização (update) pelo seu ID.
 router.get('/update/:id', (req, res, next) => {
   void getUpdateById(req, res, next)
 })
 
-// Rota para atualizar uma atualização (update) pelo seu ID, com validação dos dados de entrada.
 router.put(
   '/update/:id',
   validateUpdateInput,
@@ -94,7 +84,6 @@ router.put(
   }
 )
 
-// Rota para deletar uma atualização (update) pelo seu ID.
 router.delete('/update/:id', (req, res, next) => {
   void deleteUpdate(req, res, next)
 })
@@ -103,31 +92,24 @@ router.delete('/update/:id', (req, res, next) => {
  * Update Steps
  */
 
-// Rota para obter todos os passos de uma atualização (update).
 router.get('/updatestep', (req, res, next) => {})
 
-// Rota para criar um novo passo de atualização (update step), com validação dos dados de entrada.
 router.post(
   '/updatestep',
   validateCreateUpdateStepInput,
   (req: Request, res: Response, next: NextFunction) => {}
 )
 
-// Rota para obter um passo de atualização (update step) pelo seu ID.
 router.get('/updatestep/:id', (req, res, next) => {})
 
-// Rota para atualizar um passo de atualização (update step) pelo seu ID, com validação dos dados de entrada.
 router.put(
   '/updatestep/:id',
   validateUpdateStepInput,
   (req: Request, res: Response, next: NextFunction) => {}
 )
 
-// Rota para deletar um passo de atualização (update step) pelo seu ID.
 router.delete('/updatestep/:id', (req, res, next) => {})
 
-// Middleware para tratamento de erros.
 router.use(errorHandler)
 
-// Exporta o roteador configurado para uso em outros módulos.
 export { router }

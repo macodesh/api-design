@@ -9,37 +9,28 @@ import {
 } from '../auth'
 import { type IUser } from '../../interfaces'
 
-describe.skip('comparePasswords', () => {
+describe('comparePasswords', () => {
   it('should return true if password matches hash', async () => {
-    // Define a senha para ser comparada.
     const password = 'password123'
-    // Cria um hash da senha usando bcrypt com salt (cost) 10.
-    const hashed = await hash(password, 10)
 
-    // Chama a função comparePasswords com a senha e o hash criado.
+    const hashed = await hash(password, 10)
     const result = await comparePasswords(password, hashed)
 
-    // Verifica se o resultado retornado é verdadeiro, indicando que a senha corresponde ao hash.
     expect(result).toBe(true)
   })
 
   it('should return false if password does not match hash', async () => {
-    // Define a senha original.
     const password = 'password123'
-    // Define uma senha incorreta.
     const incorrectPassword = 'wrongpassword'
-    // Cria um hash da senha original usando bcrypt com salt (cost) 10.
-    const hashed = await hash(password, 10)
 
-    // Chama a função comparePasswords com a senha incorreta e o hash criado.
+    const hashed = await hash(password, 10)
     const result = await comparePasswords(incorrectPassword, hashed)
 
-    // Verifica se o resultado retornado é falso, indicando que a senha não corresponde ao hash.
     expect(result).toBe(false)
   })
 })
 
-describe.skip('hashPassword', () => {
+describe('hashPassword', () => {
   it('should return a hash of the password', async () => {
     const password = 'password123'
     const hashedPassword = await hashPassword(password)
@@ -49,10 +40,11 @@ describe.skip('hashPassword', () => {
   })
 })
 
-describe.skip('createToken', () => {
+describe('createToken', () => {
   // Test case: creating a token with valid user information
   it('createToken should return a valid JWT token', () => {
     const user = { id: '1', username: 'testuser' }
+
     const token = createToken(user, 'secret')
     const decoded = verify(token, 'secret') as IUser
 

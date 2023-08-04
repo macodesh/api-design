@@ -1,7 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import { body, validationResult } from 'express-validator'
 
-// Função de validação de resposta geral para ser usada ao final das validações individuais.
 function validationResponse(
   req: Request,
   res: Response,
@@ -9,16 +8,13 @@ function validationResponse(
 ): Response | undefined {
   const errors = validationResult(req)
 
-  // Verifica se houve erros de validação.
   if (!errors.isEmpty()) {
-    // Retorna uma resposta de erro com status 400 e a primeira mensagem de erro encontrada.
     return res.status(400).json({
       message: errors.array()[0].msg
     })
   } else next()
 }
 
-// Validação para sign up/sign in.
 export const validateUserInput = [
   body('username')
     .not()
@@ -41,7 +37,6 @@ export const validateUserInput = [
   validationResponse
 ]
 
-// Validações para a rota '/product'.
 export const validateProductInput = [
   body('name')
     .not()
@@ -52,11 +47,9 @@ export const validateProductInput = [
     .isLength({ min: 3, max: 50 })
     .withMessage('Name must be between 3 and 50 characters'),
 
-  // Chama a função de validação geral 'validationResponse' ao final das validações individuais.
   validationResponse
 ]
 
-// Validações para a rota '/update'.
 export const validateUpdateInput = [
   body('title')
     .optional()
@@ -84,11 +77,9 @@ export const validateUpdateInput = [
     .isLength({ max: 10 })
     .withMessage('Version must be under 10 characters'),
 
-  // Chama a função de validação geral 'validationResponse' ao final das validações individuais.
   validationResponse
 ]
 
-// Validações para criação de atualização.
 export const validateCreateUpdateInput = [
   body('title')
     .not()
@@ -125,7 +116,6 @@ export const validateCreateUpdateInput = [
   validationResponse
 ]
 
-// Validações para a rota '/updatestep'.
 export const validateUpdateStepInput = [
   body('name')
     .optional()
@@ -141,7 +131,6 @@ export const validateUpdateStepInput = [
     .isLength({ min: 3, max: 200 })
     .withMessage('Description must be between 3 and 200 characters'),
 
-  // Chama a função de validação geral 'validationResponse' ao final das validações individuais.
   validationResponse
 ]
 
@@ -169,6 +158,5 @@ export const validateCreateUpdateStepInput = [
     .isString()
     .withMessage('UpdateId must be a string'),
 
-  // Chama a função de validação geral 'validationResponse' ao final das validações individuais.
   validationResponse
 ]
