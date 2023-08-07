@@ -1,5 +1,5 @@
 import { type Response } from 'express'
-import { errorHandler } from '../errorHandler'
+import { errorHandler } from './errorHandler'
 
 describe('errorHandler', () => {
   let mockedResponse: any

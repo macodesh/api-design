@@ -20,7 +20,7 @@ import {
   getUpdateById,
   updateUpdate
 } from './handlers/update'
-import { errorHandler } from './modules/errorHandler'
+import { errorHandler } from './modules/error/errorHandler'
 
 const router: Router = Router()
 

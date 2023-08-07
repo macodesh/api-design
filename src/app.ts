@@ -11,7 +11,7 @@ import cors from 'cors'
 import { router } from './router'
 import { verifyToken } from './modules/auth'
 import { createNewUser, signIn } from './handlers/user'
-import { errorHandler } from './modules/errorHandler'
+import { errorHandler } from './modules/error/errorHandler'
 import { validateUserInput } from './modules/validations'
 
 const app: Express = express()
