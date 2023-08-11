@@ -12,12 +12,11 @@
     "lint": "eslint --fix \"src/**/*.ts\"",
     "format": "prettier --write --cache --cache-strategy metadata \"src/**/*.ts\"",
     "format:lint": "pnpm format && pnpm lint",
-    "test": "jest --silent --runInBand src",
+    "test": "NODE_ENV=\"development\" jest --silent --runInBand src",
     "test:coverage": "jest --coverage --silent --runInBand src",
     "test:watch": "jest --watch --silent --runInBand src",
     "build": "tsc -p tsconfig.json",
-    "deploy": "",
-    "start": "pnpm build && node dist/server.js"
+    "start": "pnpm build && pm2 start dist/server.js --name api_design"
   },
   "keywords": [],
   "author": "",
@@ -37,6 +36,7 @@
     "eslint-plugin-import": "npm:eslint-plugin-i@2.27.5-4",
     "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-promise": "^6.1.1",
+    "jest-mock-extended": "^3.0.5",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
     "prisma": "^5.0.0",
@@ -56,6 +56,7 @@
     "jsonwebtoken": "^9.0.1",
     "lodash.merge": "^4.6.2",
     "morgan": "^1.10.0",
+    "pm2": "^5.3.0",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1"
   }

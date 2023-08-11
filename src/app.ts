@@ -8,10 +8,10 @@ import express, {
 } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import { router } from './router'
+import router from './router'
 import { verifyToken } from './modules/auth'
 import { createNewUser, signIn } from './handlers/user'
-import { errorHandler } from './modules/error/errorHandler'
+import errorHandler from './modules/error/errorHandler'
 import { validateUserInput } from './modules/validations'
 
 const app: Express = express()
@@ -22,7 +22,7 @@ app.use(json())
 app.use(urlencoded({ extended: true }))
 
 app.get('/api', (_req, res) => {
-  res.status(200).json({ message: 'Hello, World!' })
+  res.status(200).json({ data: 'Hello, World!' })
 })
 
 app.post(
@@ -44,4 +44,4 @@ app.post(
 app.use('/api', verifyToken, router)
 app.use(errorHandler)
 
-export { app }
+export default app

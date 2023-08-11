@@ -1,13 +1,12 @@
 import { type ErrorRequestHandler } from 'express'
+import config from '../../config'
 
-export const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-  console.error(err)
-
-  if (err.type === 'auth') {
-    res.status(401).json({ message: 'Unauthorized' })
-  } else if (err.type === 'input') {
-    res.status(400).json({ message: 'Bad request' })
+const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
+  if (config.env === 'development') {
+    res.status(500).json({ error: err.stack })
   } else {
-    res.status(500).json({ message: 'Internal server error' })
+    res.status(500).json({ error: 'Something went wrong' })
   }
 }
+
+export default errorHandler

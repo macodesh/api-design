@@ -1,7 +1,7 @@
 import { type Request, type Response } from 'express'
 import * as user from '../user'
 
-describe('The user handler', () => {
+describe('user handler', () => {
   it('should create a new user', async () => {
     const req = {
       body: {

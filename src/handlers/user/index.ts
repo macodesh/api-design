@@ -1,5 +1,5 @@
 import { type NextFunction, type Request, type Response } from 'express'
-import { prisma } from '../../modules/db'
+import prisma from '../../modules/db'
 import { type UserInput } from '../../interfaces'
 import { comparePasswords, createToken, hashPassword } from '../../modules/auth'
 
@@ -21,8 +21,7 @@ export async function createNewUser(
     const token = createToken({ id: user.id, username })
 
     res.status(201).json({ token })
-  } catch (e: any) {
-    e.type = 'input'
+  } catch (e) {
     next(e)
   }
 }
@@ -42,15 +41,14 @@ export async function signIn(
     })
 
     if (user == null || !(await comparePasswords(password, user.password))) {
-      res.status(401).json({ message: 'Invalid username or password' })
+      res.status(401).json({ error: 'Invalid username or password' })
       return
     }
 
     const token = createToken({ id: user.id, username })
 
     res.status(200).json({ token })
-  } catch (e: any) {
-    e.type = 'auth'
+  } catch (e) {
     next(e)
   }
 }

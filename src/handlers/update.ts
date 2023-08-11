@@ -1,5 +1,5 @@
 import { type NextFunction, type Request, type Response } from 'express'
-import { prisma } from '../modules/db'
+import prisma from '../modules/db'
 
 export async function getAllUpdates(
   req: Request,
@@ -35,7 +35,7 @@ export async function getUpdateById(
     })
 
     if (updateFound == null) {
-      res.status(404).json({ message: 'Update not found' })
+      res.status(404).json({ error: 'Update not found' })
     } else {
       res.status(200).json({ data: updateFound })
     }
@@ -58,7 +58,7 @@ export async function createUpdate(
     })
 
     if (productFound == null) {
-      res.status(404).json({ message: 'Product not found' })
+      res.status(404).json({ error: 'Product not found' })
     } else {
       const newUpdate = await prisma.update.create({
         data: req.body
@@ -85,7 +85,7 @@ export async function updateUpdate(
     })
 
     if (updatedUpdate == null) {
-      res.status(404).json({ message: 'Update not found' })
+      res.status(404).json({ error: 'Update not found' })
     } else {
       res.status(200).json({ data: updatedUpdate })
     }
@@ -107,7 +107,7 @@ export async function deleteUpdate(
     })
 
     if (deletedUpdate == null) {
-      res.status(404).json({ message: 'Update not found' })
+      res.status(404).json({ error: 'Update not found' })
     } else {
       res.status(204).end()
     }

@@ -20,7 +20,7 @@ import {
   getUpdateById,
   updateUpdate
 } from './handlers/update'
-import { errorHandler } from './modules/error/errorHandler'
+import errorHandler from './modules/error/errorHandler'
 
 const router: Router = Router()
 
@@ -112,4 +112,4 @@ router.delete('/updatestep/:id', (req, res, next) => {})
 
 router.use(errorHandler)
 
-export { router }
+export default router

@@ -33,10 +33,10 @@ export function verifyToken(
   const { authorization } = req.headers
 
   if (authorization == null) {
-    return res.status(401).json({ message: 'Unauthorized' })
+    return res.status(401).json({ error: 'Unauthorized' })
   }
   if (!authorization.startsWith('Bearer ')) {
-    return res.status(401).json({ message: 'Invalid token' })
+    return res.status(401).json({ error: 'Invalid token' })
   }
 
   try {
@@ -47,6 +47,6 @@ export function verifyToken(
     next()
   } catch (e) {
     if (e instanceof Error) console.error(e.stack)
-    res.status(401).json({ message: 'Invalid token' })
+    res.status(401).json({ error: 'Invalid token' })
   }
 }

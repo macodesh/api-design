@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../types.d.ts" />
 import { type NextFunction, type Request, type Response } from 'express'
-import { prisma } from '../modules/db'
+import prisma from '../modules/db'
 
 export async function getAllProducts(
   req: Request,
@@ -46,7 +46,7 @@ export async function getProductById(
     })
 
     if (productFound == null) {
-      res.status(404).json({ message: 'Product not found' })
+      res.status(404).json({ error: 'Product not found' })
     } else {
       res.status(200).json({
         data: {
@@ -103,7 +103,7 @@ export async function updateProduct(
     })
 
     if (updatedProduct == null) {
-      res.status(404).json({ message: 'Product not found' })
+      res.status(404).json({ error: 'Product not found' })
     } else {
       res.status(200).json({
         data: {
@@ -132,7 +132,7 @@ export async function deleteProduct(
     })
 
     if (productFound == null) {
-      res.status(404).json({ message: 'Product not found' })
+      res.status(404).json({ error: 'Product not found' })
     } else {
       res.status(204).end()
     }

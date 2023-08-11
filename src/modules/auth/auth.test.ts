@@ -66,14 +66,14 @@ describe('verifyToken', () => {
   it('should return 401 and "Unauthorized" message when authorization header is null', () => {
     verifyToken(req as Request, res as Response, next as NextFunction)
     expect(res.status).toHaveBeenCalledWith(401)
-    expect(res.json).toHaveBeenCalledWith({ message: 'Unauthorized' })
+    expect(res.json).toHaveBeenCalledWith({ error: 'Unauthorized' })
   })
 
   it('should return 401 and "Invalid token" message when authorization header does not start with "Bearer "', () => {
     req.headers = { authorization: 'InvalidToken' }
     verifyToken(req as Request, res as Response, next as NextFunction)
     expect(res.status).toHaveBeenCalledWith(401)
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid token' })
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid token' })
   })
 
   it('should populate req.user with decoded user information when token is successfully verified', () => {
@@ -87,8 +87,6 @@ describe('verifyToken', () => {
     expect(() => {
       verifyToken(req as Request, res as Response, next as NextFunction)
     }).not.toThrow()
-
-    jest.unmock('jsonwebtoken')
   })
 
   it('should return 401 and "Invalid token" message when an error occurs during token verification or decoding', () => {
@@ -101,8 +99,6 @@ describe('verifyToken', () => {
     verifyToken(req as Request, res as Response, next as NextFunction)
 
     expect(res.status).toHaveBeenCalledWith(401)
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid token' })
-
-    jest.unmock('jsonwebtoken')
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid token' })
   })
 })
