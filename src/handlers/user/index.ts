@@ -1,6 +1,6 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import prisma from '../../modules/db'
-import { type UserInput } from '../../interfaces'
+import { type IUserInput } from '../../interfaces'
 import { comparePasswords, createToken, hashPassword } from '../../modules/auth'
 
 export async function createNewUser(
@@ -9,7 +9,7 @@ export async function createNewUser(
   next: NextFunction
 ): Promise<void> {
   try {
-    const { username, password } = req.body as UserInput
+    const { username, password } = req.body as IUserInput
 
     const user = await prisma.user.create({
       data: {
@@ -32,7 +32,7 @@ export async function signIn(
   next: NextFunction
 ): Promise<void> {
   try {
-    const { username, password } = req.body as UserInput
+    const { username, password } = req.body as IUserInput
 
     const user = await prisma.user.findUnique({
       where: {
