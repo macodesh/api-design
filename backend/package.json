@@ -4,8 +4,6 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "compose:up": "docker-compose up -d",
-    "compose:down": "docker-compose down",
     "db:migrate": "prisma migrate dev",
     "db:reset": "prisma migrate reset",
     "dev": "nodemon --ext ts src/server.ts",

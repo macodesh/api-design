@@ -1,0 +1,16 @@
+{
+  "name": "api-design",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compose:up": "docker-compose up -d",
+    "compose:down": "docker-compose down",
+    "install:back": "cd backend && pnpm install && cd ..",
+    "install:front": "cd frontend && pnpm install && cd ..",
+    "install:all": "pnpm install:back && pnpm install:front"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
