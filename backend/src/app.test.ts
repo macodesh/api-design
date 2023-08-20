@@ -1,7 +1,7 @@
 import supertest from 'supertest'
-import app from '../app'
-import { prismaMock } from '../singleton'
-import * as auth from '../modules/auth'
+import app from './app'
+import { prismaMock } from './singleton'
+import * as auth from './modules/auth'
 
 describe('get /api', () => {
   it('should return 200 and message: "Hello, World!"', async () => {
@@ -12,7 +12,7 @@ describe('get /api', () => {
 })
 
 describe('user routes', () => {
-  const validationResult = jest.fn(() => ({
+  const validationResultMock = jest.fn(() => ({
     isEmpty: jest.fn(() => true),
     array: jest.fn(() => [])
   }))
@@ -26,7 +26,7 @@ describe('user routes', () => {
 
   describe('post /api/signup', () => {
     it('should return 201 and a token', async () => {
-      validationResult().isEmpty.mockReturnValue(true)
+      validationResultMock().isEmpty.mockReturnValue(true)
       prismaMock.user.create.mockResolvedValue(user)
 
       const res = await supertest(app).post('/api/signup').send({
@@ -44,7 +44,7 @@ describe('user routes', () => {
     const comparePasswordsMock = jest.spyOn(auth, 'comparePasswords')
 
     it('should return 200 and a token', async () => {
-      validationResult().isEmpty.mockReturnValue(true)
+      validationResultMock().isEmpty.mockReturnValue(true)
       prismaMock.user.findUnique.mockResolvedValue(user)
       comparePasswordsMock.mockResolvedValue(true)
 

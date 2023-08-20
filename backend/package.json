@@ -14,7 +14,8 @@
     "test:coverage": "jest --coverage --silent --runInBand src",
     "test:watch": "jest --watch --silent --runInBand src",
     "build": "tsc -p tsconfig.json",
-    "start": "pnpm build && pm2 start dist/server.js --name api_design"
+    "start": "pnpm build && pm2 start dist/server.js --name api_design",
+    "prisma": "prisma generate"
   },
   "keywords": [],
   "author": "",

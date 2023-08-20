@@ -15,7 +15,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module",
     "parser": "@typescript-eslint/parser",
-    "project": "tsconfig.json"
+    "project": "./tsconfig.json"
   },
   "rules": {
     "@typescript-eslint/space-before-function-paren": "off",
@@ -60,7 +60,7 @@
     },
     "import/resolver": {
       "typescript": {
-        "project": "tsconfig.json"
+        "project": "./tsconfig.json"
       },
       "node": {
         "extensions": [

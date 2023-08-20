@@ -8,7 +8,7 @@ import express, {
 } from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
-import router from './router'
+import router from './routers/router'
 import { verifyToken } from './modules/auth'
 import { createNewUser, signIn } from './handlers/user'
 import errorHandler from './modules/error/errorHandler'

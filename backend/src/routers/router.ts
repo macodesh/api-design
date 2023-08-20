@@ -5,22 +5,22 @@ import {
   validateProductInput,
   validateUpdateInput,
   validateUpdateStepInput
-} from './modules/validations'
+} from '../modules/validations'
 import {
   createProduct,
   deleteProduct,
   getAllProducts,
   getProductById,
   updateProduct
-} from './handlers/product'
+} from '../handlers/product'
 import {
   createUpdate,
   deleteUpdate,
   getAllUpdates,
   getUpdateById,
   updateUpdate
-} from './handlers/update'
-import errorHandler from './modules/error/errorHandler'
+} from '../handlers/update'
+import errorHandler from '../modules/error/errorHandler'
 
 const router: Router = Router()
 
