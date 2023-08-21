@@ -12,6 +12,7 @@
     "format:lint": "pnpm format && pnpm lint",
     "test": "cross-env NODE_ENV=development jest --silent --runInBand src",
     "test:coverage": "jest --coverage --silent --runInBand src",
+    "test:verbose": "cross-env NODE_ENV=development jest --verbose --runInBand src",
     "test:watch": "jest --watch --silent --runInBand src",
     "build": "tsc -p tsconfig.json",
     "start": "pnpm build && pm2 start dist/server.js --name api_design",

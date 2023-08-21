@@ -58,7 +58,7 @@ describe('verifyToken', () => {
   let next: jest.Mock
 
   beforeEach(() => {
-    req = { headers: {}, user: {} }
+    req = { headers: {} }
     res = { status: jest.fn().mockReturnThis(), json: jest.fn() }
     next = jest.fn()
   })
