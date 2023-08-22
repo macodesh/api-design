@@ -79,8 +79,8 @@ describe('product routes', () => {
         .set('authorization', 'Bearer validToken')
 
       expect(res.body.error).toBeUndefined()
-      expect(res.status).toBe(200)
-      expect(res.body.data).toBeDefined()
+      expect(res.status).toBe(204)
+      expect(res.body.data).toBeUndefined()
     })
   })
 })
