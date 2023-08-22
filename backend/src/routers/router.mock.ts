@@ -1,8 +1,3 @@
-export const validationResultMock = jest.fn(() => ({
-  isEmpty: jest.fn(() => true),
-  array: jest.fn(() => [])
-}))
-
 export const user = {
   id: '1',
   username: 'test',
@@ -22,4 +17,11 @@ export const user = {
       userId: '2'
     }
   ]
+}
+
+export const product = {
+  id: '1',
+  name: 'test',
+  createdAt: new Date(),
+  userId: user.id
 }
