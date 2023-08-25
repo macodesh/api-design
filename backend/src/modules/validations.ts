@@ -1,6 +1,13 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import { body, validationResult } from 'express-validator'
 
+/*
+ * Validação de entradas
+ * A função validationResponse é um middleware que verifica se há erros de validação
+ * e retorna uma resposta com status 400 e o primeiro erro encontrado.
+ * Se não houver erros, a função next() é chamada para continuar o fluxo da requisição.
+ */
+
 function validationResponse(
   req: Request,
   res: Response,
@@ -14,6 +21,8 @@ function validationResponse(
     })
   } else next()
 }
+
+// As validações abaixo são passadas como um array de middlewares para as rotas correspondentes.
 
 export const validateUserInput = [
   body('username')

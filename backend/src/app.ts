@@ -16,15 +16,21 @@ import { validateUserInput } from './modules/validations'
 
 const app: Express = express()
 
+// Middlewares
+
 app.use(cors())
 app.use(morgan('dev'))
 app.use(json())
 app.use(urlencoded({ extended: true }))
 
+// Rotas
+
+// Rota de teste
 app.get('/api', (_req, res) => {
   res.status(200).json({ data: 'Hello, World!' })
 })
 
+// Rota de cadastro de conta
 app.post(
   '/api/signup',
   validateUserInput,
@@ -33,6 +39,7 @@ app.post(
   }
 )
 
+// Rota de login
 app.post(
   '/api/signin',
   validateUserInput,
@@ -41,7 +48,10 @@ app.post(
   }
 )
 
+// Rotas protegidas por autenticação
 app.use('/api', verifyToken, router)
+
+// Middleware de tratamento de erros
 app.use(errorHandler)
 
 export default app

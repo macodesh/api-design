@@ -1,6 +1,13 @@
 import { type NextFunction, type Request, type Response } from 'express'
 import prisma from '../modules/db'
 
+/*
+ * A função getAllUpdates retorna todas as atualizações de um produto.
+ * Os produtos são filtrados pelo id do usuário, que é obtido do token JWT,
+ * e as atualizações são incluídas na resposta.
+ * As atualizações são mapeadas e retornadas em um array.
+ */
+
 export async function getAllUpdates(
   req: Request,
   res: Response,
@@ -21,6 +28,13 @@ export async function getAllUpdates(
     next(e)
   }
 }
+
+/*
+ * A função getUpdateById retorna uma atualização de um produto.
+ * As atualizações são filtradas pelo id recebido no parâmetro da URL,
+ * e retornadas na resposta.
+ * Caso a atualização não seja encontrada, uma resposta com status 404 é retornada.
+ */
 
 export async function getUpdateById(
   req: Request,
@@ -43,6 +57,13 @@ export async function getUpdateById(
     next(e)
   }
 }
+
+/*
+ * A função createUpdate cria uma nova atualização de um produto.
+ * Os produtos são filtrados pelo id do usuário, que é obtido do token JWT,
+ * e também usando o id de produto recebido no corpo da requisição.
+ * Caso o produto não seja encontrado, uma resposta com status 404 é retornada.
+ */
 
 export async function createUpdate(
   req: Request,

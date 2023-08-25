@@ -7,6 +7,16 @@ import config from '../../config'
 const jwtSecret = config.secrets.jwt
 const salts = config.secrets.salts
 
+/*
+ * Funções de autenticação
+ * A função comparePasswords compara uma senha em texto plano com uma senha "hasheada"
+ * e retorna true se as senhas coincidirem.
+ * A função hashPassword recebe uma senha em texto plano e retorna uma senha "hasheada".
+ * A função createToken recebe um usuário e retorna um token JWT.
+ * A função verifyToken é um middleware que verifica se o token JWT é válido,
+ * e retorna uma resposta com status 401 se não for.
+ */
+
 export async function comparePasswords(
   password: string,
   hash: string
